@@ -5,9 +5,6 @@ function modifyCost(costId, costRate) {
 
     //Call function to modify total price
     modifyTotalPrice();
-
-    //enable apply coupon button
-    document.getElementById('apply-promo').disabled = false;
 }
 
 
@@ -16,17 +13,6 @@ function getCost(costId) {
     const costText = document.getElementById(costId).innerText;
     const cost = parseInt(costText);
     return cost;
-}
-
-
-//set total and bottom total price
-function setTotal(newTotal) {
-    const totalPrice = document.getElementById('total-cost');
-    totalPrice.innerText = newTotal;
-
-    //set bottom total price
-    const bottomTotalPrice = document.getElementById('bottom-total');
-    bottomTotalPrice.innerText = newTotal;
 }
 
 
@@ -41,8 +27,13 @@ function modifyTotalPrice() {
     //add all the costs
     const newTotal = bestPrice + memoryCost + storageCost + deliveryCost;
 
-    //call function to set new total price
-    setTotal(newTotal);
+    //set total price
+    const totalPrice = document.getElementById('total-cost');
+    totalPrice.innerText = newTotal;
+
+    //set bottom total price
+    const bottomTotalPrice = document.getElementById('bottom-total');
+    bottomTotalPrice.innerText = newTotal;
 }
 
 
@@ -95,13 +86,11 @@ document.getElementById('apply-promo').addEventListener('click', function () {
         //set new total price upto 2 decimal places
         newTotal = newTotal.toFixed(2)
 
-        //call function to set new total price
-        setTotal(newTotal);
+        //set new bottom total price
+        const bottomTotalPrice = document.getElementById('bottom-total');
+        bottomTotalPrice.innerText = newTotal;
 
         //remove coupon
         promo.value = ""
-
-        //disable apply coupon button
-        document.getElementById('apply-promo').disabled = true
     }
 })
